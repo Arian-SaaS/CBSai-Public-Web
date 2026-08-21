@@ -11,4 +11,18 @@ export default defineConfig({
   resolve: {
     alias: { "@": rootDir },
   },
+  build: {
+    rollupOptions: {
+      input: {
+        main: path.resolve(rootDir, "index.html"),
+        platform: path.resolve(rootDir, "platform.html"),
+        industries: path.resolve(rootDir, "industries.html"),
+        security: path.resolve(rootDir, "security.html"),
+        resources: path.resolve(rootDir, "resources.html"),
+        privacy: path.resolve(rootDir, "privacy.html"),
+        terms: path.resolve(rootDir, "terms.html"),
+        applicantPrivacy: path.resolve(rootDir, "applicant-privacy.html"),
+      },
+    },
+  },
 });

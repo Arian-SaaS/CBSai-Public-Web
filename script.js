@@ -86,21 +86,55 @@ document.addEventListener('keydown', (event) => {
   }
 });
 
-function showFeedback(form, message) {
+function showFeedback(form, message, state = '') {
   const feedback = form.querySelector('.form-feedback');
-  if (feedback) feedback.textContent = message;
+  if (!feedback) return;
+  feedback.textContent = message;
+  feedback.className = `form-feedback${state ? ` ${state}` : ''}`;
 }
 
-demoForm?.addEventListener('submit', (event) => {
-  event.preventDefault();
-  showFeedback(demoForm, 'Thanks — we’ll be in touch soon.');
-  demoForm.reset();
-});
+async function submitLead(form) {
+  const submitButton = form.querySelector('button[type="submit"]');
+  if (submitButton?.disabled) return;
+  const buttonLabel = submitButton?.innerHTML;
+  const leadType = form.dataset.leadForm || 'demo';
+  const payload = Object.fromEntries(new FormData(form).entries());
+  delete payload.website;
 
-subscribeForm?.addEventListener('submit', (event) => {
-  event.preventDefault();
-  showFeedback(subscribeForm, 'You’re on the list.');
-  subscribeForm.reset();
+  submitButton?.setAttribute('aria-busy', 'true');
+  if (submitButton) {
+    submitButton.disabled = true;
+    submitButton.textContent = leadType === 'newsletter' ? 'Joining…' : 'Sending…';
+  }
+  showFeedback(form, 'Sending securely…', 'is-pending');
+
+  try {
+    const response = await fetch('/api/leads', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
+      body: JSON.stringify({ type: leadType, ...payload }),
+    });
+    const result = await response.json().catch(() => ({}));
+    if (!response.ok) throw new Error(result.message || 'We could not deliver that request.');
+    showFeedback(form, leadType === 'newsletter' ? 'You’re on the list — thank you.' : 'Your request is in our queue. We’ll be in touch soon.', 'is-success');
+    form.reset();
+    track(leadType === 'newsletter' ? 'newsletter_submitted' : 'demo_submitted');
+  } catch (error) {
+    showFeedback(form, 'We could not send this yet. Please retry or email marketing@cbsai.co.', 'is-error');
+  } finally {
+    submitButton?.removeAttribute('aria-busy');
+    if (submitButton) {
+      submitButton.disabled = false;
+      submitButton.innerHTML = buttonLabel;
+    }
+  }
+}
+
+document.querySelectorAll('[data-lead-form]').forEach((form) => {
+  form.addEventListener('submit', (event) => {
+    event.preventDefault();
+    submitLead(form);
+  });
 });
 
 const assistantData = {
