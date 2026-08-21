@@ -1,0 +1,34 @@
+@import "tailwindcss";
+
+/* shadcn semantic tokens mapped onto the CBSai brand palette, so shadcn
+   primitives (Badge/Button/Card) render on-brand instead of default slate.
+   Values mirror the --brand-* tokens in styles.css. */
+@theme {
+  --color-background: #05070d;
+  --color-foreground: #eff6ff;
+
+  --color-card: #0d2040;
+  --color-card-foreground: #eff6ff;
+
+  --color-popover: #0a1831;
+  --color-popover-foreground: #eff6ff;
+
+  --color-primary: #2c9ff0;
+  --color-primary-foreground: #05070d;
+
+  --color-secondary: #0a1831;
+  --color-secondary-foreground: #eff6ff;
+
+  --color-muted: #071126;
+  --color-muted-foreground: #9caec7;
+
+  --color-accent: #58c9ff;
+  --color-accent-foreground: #05070d;
+
+  --color-destructive: #e8927f;
+  --color-destructive-foreground: #05070d;
+
+  --color-border: #24405f;
+  --color-input: #26405f;
+  --color-ring: #58c9ff;
+}

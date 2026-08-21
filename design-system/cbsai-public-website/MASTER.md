@@ -1,8 +1,18 @@
 # Design System Master File
 
-> **LOGIC:** When building a specific page, first check `design-system/pages/[page-name].md`.
+> **LOGIC:** When building a specific page, first check
+> `design-system/cbsai-public-website/pages/[page-name].md` — the `pages/` directory
+> scoped to THIS project, beside this file.
 > If that file exists, its rules **override** this Master file.
 > If not, strictly follow the rules below.
+>
+> **Active override: [`pages/home.md`](pages/home.md).** The site is one long-scroll
+> page, so that file effectively governs the whole build and supersedes several
+> sections below (palette, violet anti-pattern, motion framework, focus ring).
+> Read it before treating anything here as current.
+>
+> _Path note (resolved 2026-08-20): this previously read `design-system/pages/…`,
+> which does not exist in this repo. The project-scoped path above is the real one._
 
 ---
 

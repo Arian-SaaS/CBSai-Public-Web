@@ -26,6 +26,20 @@ window.addEventListener('scroll', () => {
   header?.classList.toggle('scrolled', window.scrollY > 8);
 }, { passive: true });
 
+function alignHashTarget() {
+  const targetId = window.location.hash.slice(1);
+  const target = targetId ? document.getElementById(targetId) : null;
+  if (!target) return;
+  const headerOffset = header?.getBoundingClientRect().height ?? 0;
+  const targetTop = target.getBoundingClientRect().top + window.scrollY - headerOffset - 8;
+  window.scrollTo({ top: Math.max(0, targetTop), behavior: 'auto' });
+}
+
+window.addEventListener('hashchange', () => window.setTimeout(alignHashTarget, 0));
+window.setTimeout(alignHashTarget, 0);
+window.addEventListener('load', () => window.setTimeout(alignHashTarget, 0));
+document.fonts?.ready.then(() => window.setTimeout(alignHashTarget, 0));
+
 let lastFocusedElement = null;
 function setModal(open) {
   if (!modal) return;
@@ -43,11 +57,14 @@ function setModal(open) {
   }
 }
 
-demoTriggers.forEach((trigger) => trigger.addEventListener('click', (event) => {
+document.addEventListener('click', (event) => {
+  const target = event.target;
+  const trigger = target instanceof Element ? target.closest('[data-open-demo]') : null;
+  if (!trigger) return;
   event.preventDefault();
   track('demo_opened');
   setModal(true);
-}));
+});
 modalClose?.addEventListener('click', () => setModal(false));
 modal?.addEventListener('click', (event) => {
   if (event.target === modal) setModal(false);
@@ -103,9 +120,9 @@ const assistantData = {
     source: 'Based on workforce records, payroll readiness checks, and workspace policy.'
   },
   artemis: {
-    avatar: '✦', label: 'Cross-business intelligence', title: 'See the relationship between the signals.',
-    message: '“A change in vendor lead times, project margin, and open hiring requests may affect the Northstar delivery window. Review the connected recommendation.”',
-    source: 'Based on finance, projects, vendors, and workforce signals across the workspace.'
+    avatar: '✦', label: 'Cross-business intelligence', title: 'Understand the relationships across the business.',
+    message: '“Northstar is most likely to miss its margin target because vendor lead times increased, materials costs moved above plan, and two approvals remain open. Review the connected recommendation.”',
+    source: 'Based on finance, projects, vendors, inventory, workforce, and approval context across the workspace.'
   }
 };
 
@@ -125,6 +142,31 @@ document.querySelectorAll('[data-assistant]').forEach((tab) => {
     document.querySelector('[data-assistant-title]').textContent = data.title;
     document.querySelector('[data-assistant-message]').textContent = data.message;
     document.querySelector('[data-assistant-source]').textContent = data.source;
+  });
+});
+
+const ecosystemData = {
+  finance: { readout: 'Finance signal connected', source: 'Ziba · Margin and budget context' },
+  customers: { readout: 'Customer signal connected', source: 'Jupiter · Account and service context' },
+  people: { readout: 'People signal connected', source: 'Atoosa · Workforce readiness context' },
+  vendors: { readout: 'Vendor signal connected', source: 'Control · Supplier and purchasing context' },
+  projects: { readout: 'Delivery signal connected', source: 'Project control · Schedule and cost context' },
+  inventory: { readout: 'Inventory signal connected', source: 'Flow · Stock and fulfillment context' }
+};
+
+const ecosystemReadout = document.querySelector('[data-ecosystem-readout]');
+const ecosystemSource = document.querySelector('[data-ecosystem-source]');
+document.querySelectorAll('[data-ecosystem-domain]').forEach((node) => {
+  node.addEventListener('click', () => {
+    const data = ecosystemData[node.dataset.ecosystemDomain];
+    if (!data) return;
+    document.querySelectorAll('[data-ecosystem-domain]').forEach((item) => {
+      const active = item === node;
+      item.classList.toggle('is-active', active);
+      item.setAttribute('aria-pressed', String(active));
+    });
+    if (ecosystemReadout) ecosystemReadout.textContent = data.readout;
+    if (ecosystemSource) ecosystemSource.textContent = data.source;
   });
 });
 
@@ -259,3 +301,117 @@ document.addEventListener('keydown', (event) => {
     else if (!event.shiftKey && document.activeElement === last) { event.preventDefault(); first.focus(); }
   }
 });
+
+/* ── Material & motion pass (Claude, 2026-08-20) ─────────────────────────────
+   Cursor-aware card lighting, glow parallax, and stat counters. All three are
+   skipped entirely when the visitor prefers reduced motion.                  */
+const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
+
+if (!prefersReducedMotion.matches) {
+  // Cursor-aware card lighting — one delegated listener, writes only CSS vars.
+  const lightCards = document.querySelectorAll('.platform-card');
+  lightCards.forEach((card) => {
+    card.addEventListener('pointermove', (event) => {
+      const rect = card.getBoundingClientRect();
+      card.style.setProperty('--mx', `${event.clientX - rect.left}px`);
+      card.style.setProperty('--my', `${event.clientY - rect.top}px`);
+    }, { passive: true });
+  });
+
+  // Glow parallax, rAF-throttled so scrolling stays cheap.
+  const glowLayer = document.querySelector('.site-glow-horizon');
+  if (glowLayer) {
+    let ticking = false;
+    window.addEventListener('scroll', () => {
+      if (ticking) return;
+      ticking = true;
+      window.requestAnimationFrame(() => {
+        const shift = Math.min(window.scrollY * 0.12, 160);
+        glowLayer.style.setProperty('--glow-shift', `${-shift}px`);
+        ticking = false;
+      });
+    }, { passive: true });
+  }
+
+  // Count up numeric stats the first time they scroll into view.
+  const statNodes = [...document.querySelectorAll('.ecosystem-stats strong')]
+    .filter((node) => /^\d+$/.test(node.textContent.trim()));
+  if (statNodes.length && 'IntersectionObserver' in window) {
+    const countObserver = new IntersectionObserver((entries, instance) => {
+      entries.forEach((entry) => {
+        if (!entry.isIntersecting) return;
+        instance.unobserve(entry.target);
+        const node = entry.target;
+        const target = Number(node.textContent.trim());
+        const pad = node.textContent.trim().length;
+        const started = performance.now();
+        const step = (now) => {
+          const progress = Math.min((now - started) / 900, 1);
+          const eased = 1 - Math.pow(1 - progress, 3);
+          node.textContent = String(Math.round(target * eased)).padStart(pad, '0');
+          if (progress < 1) window.requestAnimationFrame(step);
+        };
+        window.requestAnimationFrame(step);
+      });
+    }, { threshold: .6 });
+    statNodes.forEach((node) => countObserver.observe(node));
+  }
+}
+
+/* ── Workflow motion orchestrator (Claude, 2026-08-20) ───────────────────────
+   Stamps a --i stagger index on each diagram's children, then adds
+   .is-animated when the diagram scrolls into view. The CSS in styles.css owns
+   every actual animation; this file only decides index and timing. Skipped
+   entirely under prefers-reduced-motion.                                     */
+const motionTargets = [
+  ['.workflow-rail', '.workflow-steps li'],
+  ['.fragmentation-map', '.orbit-node'],
+  ['.card-chart-mini', 'i'],
+  ['.bar-chart', 'span'],
+  ['.kanban-mini', 'i'],
+  ['.star-field', 'i'],
+  ['.governance-visual', '.governance-point'],
+  ['.adoption-steps', 'li'],
+];
+
+if (!prefersReducedMotion.matches && 'IntersectionObserver' in window) {
+  const motionObserver = new IntersectionObserver((entries, instance) => {
+    entries.forEach((entry) => {
+      if (!entry.isIntersecting) return;
+      entry.target.classList.add('is-animated');
+      instance.unobserve(entry.target);
+    });
+    // rootMargin pre-arms the diagram so a fast scroll still triggers it; the
+    // low threshold matters for tall visuals that never fit the viewport.
+  }, { threshold: .05, rootMargin: '0px 0px 12% 0px' });
+
+  motionTargets.forEach(([containerSelector, childSelector]) => {
+    document.querySelectorAll(containerSelector).forEach((container) => {
+      container.querySelectorAll(childSelector).forEach((child, index) => {
+        child.style.setProperty('--i', String(index));
+        // Give drifting nodes their own vector so they don't move in lockstep.
+        if (child.classList.contains('orbit-node')) {
+          child.style.setProperty('--dx', `${(index % 2 ? 1 : -1) * (3 + index)}px`);
+          child.style.setProperty('--dy', `${(index % 3 ? -1 : 1) * (4 + index)}px`);
+        }
+      });
+      motionObserver.observe(container);
+    });
+  });
+
+  // Re-animate the assistant panel whenever a different assistant is chosen.
+  const assistantPanel = document.querySelector('.assistant-panel');
+  if (assistantPanel) {
+    document.querySelectorAll('[data-assistant]').forEach((tab) => {
+      tab.addEventListener('click', () => {
+        assistantPanel.classList.remove('is-swapping');
+        // Force a reflow so the animation restarts on a repeat selection.
+        void assistantPanel.offsetWidth;
+        assistantPanel.classList.add('is-swapping');
+      });
+    });
+    assistantPanel.addEventListener('animationend', () => {
+      assistantPanel.classList.remove('is-swapping');
+    });
+  }
+}
