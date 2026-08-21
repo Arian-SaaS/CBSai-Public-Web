@@ -1815,10 +1815,17 @@ body { background: var(--brand-void) !important; }
     var(--brand-void) !important;
 }
 /* Keep the fine dot texture; drop the big arcs, which are hero-scale and would
-   dominate behind body copy. */
+   dominate behind body copy.
+
+   The sparks go too. They were designed as highlights ON those arcs; with the
+   arcs hidden they are just two orphan 4-5px dots — and because they live in
+   this POSITION:FIXED parallax layer they stay pinned to the viewport while the
+   page scrolls past, reading as a dot that detaches from the hero console's
+   "Live" indicator and floats around. Verified: hero-console-dot goes y=267 ->
+   -3733 while scrolling (correct); the spark held at y=191 (the bug). */
 .site-glow-horizon > .site-glow,
-.site-glow-horizon > .site-horizon-arc { display: none; }
-.site-horizon-spark { display: block; }
+.site-glow-horizon > .site-horizon-arc,
+.site-glow-horizon > .site-horizon-spark { display: none; }
 
 /* ── Fragmentation map: colour the "disconnected today" story ────────────────
    Six systems in six different colours reads as fragmented; the CBSai layer
@@ -1846,9 +1853,8 @@ body { background: var(--brand-void) !important; }
 .connected-layer small { color: #b9cfe8; }
 .layer-signal { background: var(--brand-blue-bright); box-shadow: 0 0 12px rgba(88, 201, 255, .8); }
 
-/* MEASURED: re-enabling the two sparks' drift cost 16.7ms -> 33.3ms (60fps ->
-   30fps). They look trivial, but they live inside .site-glow-horizon, a fixed
+/* MEASURED (kept for the record): animating these sparks cost 16.7ms -> 33.3ms
+   (60fps -> 30fps), because they live inside .site-glow-horizon, a fixed
    full-viewport layer with `isolation: isolate` — animating any child forces
-   the whole layer to re-composite every frame. They stay visible but static;
-   the ambient colour field carries the life instead. Do not re-enable without
-   re-measuring. */
+   the whole layer to re-composite every frame. They are now hidden entirely
+   (see above), but the same cost applies to anything animated in that layer. */
