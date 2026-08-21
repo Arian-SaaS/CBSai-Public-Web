@@ -2054,3 +2054,43 @@ body { background: var(--brand-void) !important; }
 .detail-split h2,
 .detail-callout h2,
 .teaser-layout h2 { line-height: 1.07; }
+
+/* The module grid holds 8 cards; 4 columns divides evenly (4+4) where the
+   default 3 would leave a hole on the last row. */
+@media (min-width: 1081px) {
+  .detail-card-grid.is-eight { grid-template-columns: repeat(4, 1fr); }
+}
+
+/* Qualifying note under a detail grid — deliberately quieter than body copy. */
+.detail-note {
+  max-width: 760px;
+  padding-left: 16px;
+  border-left: 1px solid rgba(137, 188, 239, .28);
+  color: #9caec7;
+  font-size: 13.5px;
+  line-height: 1.65;
+}
+
+/* ── Detail pages: touch targets and label legibility (Claude, 2026-08-21) ───
+   The homepage got this pass earlier; the detail pages predate it. Links sat
+   under 40px tall and card/eyebrow labels under 10px on phones. Scoped to
+   touch widths so desktop density is unchanged.                              */
+@media (max-width: 900px) {
+  .detail-text-link,
+  .detail-card a,
+  .legal-footer a,
+  .detail-callout a:not(.button) {
+    display: inline-flex;
+    align-items: center;
+    min-height: 44px;
+  }
+  .detail-card-number,
+  .detail-card b,
+  .detail-loop small,
+  .detail-loop span { font-size: 10.5px; }
+}
+
+/* Proof-strip captions were 9px on phones. */
+@media (max-width: 900px) {
+  .detail-proof-grid span { font-size: 10.5px; letter-spacing: .06em; }
+}
