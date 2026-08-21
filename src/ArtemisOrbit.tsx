@@ -44,7 +44,7 @@ const domains: OrbitalItem[] = [
   {
     id: 4,
     title: "Vendors",
-    date: "Control",
+    date: "Jupiter Ops",
     category: "Supply & purchasing",
     content:
       "Purchase orders, lead times and supplier changes surface as delivery and margin risk before they land.",
@@ -56,7 +56,7 @@ const domains: OrbitalItem[] = [
   {
     id: 5,
     title: "Projects",
-    date: "Delivery",
+    date: "Project Mgmt",
     category: "Schedule & cost",
     content:
       "Schedule, labour and cost in one place, so project performance is read as financial performance.",
@@ -68,7 +68,7 @@ const domains: OrbitalItem[] = [
   {
     id: 6,
     title: "Inventory",
-    date: "Flow",
+    date: "Jupiter Ops",
     category: "Stock & fulfilment",
     content:
       "Stock positions and fulfilment status, connected to vendor lead times and the deliveries waiting on them.",

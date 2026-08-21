@@ -183,9 +183,9 @@ const ecosystemData = {
   finance: { readout: 'Finance signal connected', source: 'Ziba · Margin and budget context' },
   customers: { readout: 'Customer signal connected', source: 'Jupiter · Account and service context' },
   people: { readout: 'People signal connected', source: 'Atoosa · Workforce readiness context' },
-  vendors: { readout: 'Vendor signal connected', source: 'Control · Supplier and purchasing context' },
-  projects: { readout: 'Delivery signal connected', source: 'Project control · Schedule and cost context' },
-  inventory: { readout: 'Inventory signal connected', source: 'Flow · Stock and fulfillment context' }
+  vendors: { readout: 'Vendor signal connected', source: 'Jupiter Ops · Supplier and purchasing context' },
+  projects: { readout: 'Delivery signal connected', source: 'Project Management Agent · Schedule and cost context' },
+  inventory: { readout: 'Inventory signal connected', source: 'Jupiter Ops · Stock and fulfillment context' }
 };
 
 const ecosystemReadout = document.querySelector('[data-ecosystem-readout]');
