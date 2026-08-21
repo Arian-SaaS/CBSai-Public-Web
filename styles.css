@@ -2033,3 +2033,24 @@ body { background: var(--brand-void) !important; }
 @media (prefers-reduced-motion: reduce) {
   .detail-card, .industry-card, .resource-card { transition: none; }
 }
+
+/* ── Heading leading: stop Calistoga descenders colliding (Claude, 2026-08-21)
+   The detail/teaser/legal headings ran at line-height .9-.98. Calistoga is a
+   display serif with long descenders (g, p, y) and tall ascenders (S, f, h, l),
+   so below ~1.05 the ink of consecutive lines genuinely overlaps — most visibly
+   on security.html, where the h1 renders 125px text on a 112.5px line and
+   "enough to help." crashes into "Specific enough to".
+
+   Detected by rasterising each heading and counting contiguous ink bands: a
+   heading showing fewer ink bands than it has text lines has merged lines.
+
+   .animate-hero-content h1 is deliberately NOT included — the Animate Hero must
+   not change, and its lines are separate block elements whose ascender and
+   descender patterns happen to clear.                                        */
+
+.detail-hero h1 { line-height: 1.06; }
+.legal-article h1 { line-height: 1.06; }
+.detail-heading h2,
+.detail-split h2,
+.detail-callout h2,
+.teaser-layout h2 { line-height: 1.07; }
