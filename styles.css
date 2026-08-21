@@ -1780,3 +1780,75 @@ body,
 @media (prefers-reduced-motion: reduce) {
   .artemis-orbit-ring { transition: none; }
 }
+
+/* ── Ambient light field (Claude, 2026-08-20) ────────────────────────────────
+   The flat --brand-void read as dead. Sections below the hero are now
+   transparent so the fixed .site-glow-horizon shows through as a soft field of
+   violet / pink / blue pools, echoing the hero glow down the whole page.
+
+   The HERO stays opaque on purpose: making it transparent would composite this
+   field with GlowHorizonFM and change the Animate Hero's appearance.
+
+   The pools are STATIC gradients, not animated, so this costs one rasterisation
+   rather than per-frame work — the 60fps budget is preserved. The existing
+   scroll parallax (--glow-shift) still drifts the field as you scroll.        */
+
+.section,
+.section-problem, .section-workflow, .section-platform, .section-industries,
+.section-assistants, .section-artemis, .section-outcomes, .section-governance,
+.section-demo, .section-adoption, .section-ecosystem, .section-about,
+.section-careers, .section-cta,
+.site-footer, .privacy-footer-strip {
+  background: transparent !important;
+}
+body { background: var(--brand-void) !important; }
+.hero { background: var(--brand-void) !important; }
+
+.site-glow-horizon {
+  background:
+    radial-gradient(58% 40% at 14% 6%,   rgba(165, 88, 251, .17), transparent 62%),
+    radial-gradient(50% 34% at 86% 20%,  rgba(236, 72, 153, .11), transparent 64%),
+    radial-gradient(62% 40% at 46% 44%,  rgba(73, 34, 229, .15),  transparent 66%),
+    radial-gradient(54% 36% at 8% 66%,   rgba(44, 159, 240, .13), transparent 64%),
+    radial-gradient(52% 36% at 92% 74%,  rgba(165, 88, 251, .13), transparent 64%),
+    radial-gradient(58% 38% at 40% 96%,  rgba(88, 201, 255, .10), transparent 66%),
+    var(--brand-void) !important;
+}
+/* Keep the fine dot texture; drop the big arcs, which are hero-scale and would
+   dominate behind body copy. */
+.site-glow-horizon > .site-glow,
+.site-glow-horizon > .site-horizon-arc { display: none; }
+.site-horizon-spark { display: block; }
+
+/* ── Fragmentation map: colour the "disconnected today" story ────────────────
+   Six systems in six different colours reads as fragmented; the CBSai layer
+   below resolves to one brand colour. The colour IS the argument.            */
+
+.map-label-top { color: #e0a35c; }
+.map-label-top span { color: #a8916f; }
+
+.orbit-node { font-weight: 700; transition: border-color .25s var(--ease), box-shadow .25s var(--ease); }
+.node-finance   { border-color: rgba(30, 200, 150, .42) !important; background: rgba(10, 42, 35, .92) !important; color: #6fe3bd !important; }
+.node-crm       { border-color: rgba(88, 201, 255, .42) !important; background: rgba(9, 34, 58, .92) !important; color: #8fd7ff !important; }
+.node-people    { border-color: rgba(165, 88, 251, .42) !important; background: rgba(30, 17, 55, .92) !important; color: #c9a4ff !important; }
+.node-projects  { border-color: rgba(223, 156, 64, .42) !important; background: rgba(45, 31, 12, .92) !important; color: #f0be7c !important; }
+.node-vendors   { border-color: rgba(232, 117, 101, .42) !important; background: rgba(48, 20, 17, .92) !important; color: #f5a294 !important; }
+.node-inventory { border-color: rgba(120, 190, 235, .40) !important; background: rgba(12, 30, 47, .92) !important; color: #a8cfe8 !important; }
+
+.map-arrow { border-color: rgba(88, 201, 255, .42) !important; background: rgba(10, 26, 52, .95) !important; color: var(--brand-blue-bright) !important; }
+
+.connected-layer {
+  border-color: rgba(88, 201, 255, .55) !important;
+  background: linear-gradient(120deg, rgba(16, 40, 78, .96), rgba(28, 20, 62, .96)) !important;
+  box-shadow: 0 0 0 1px rgba(165, 88, 251, .16), 0 14px 44px rgba(37, 134, 255, .22);
+}
+.connected-layer b { color: #fff; }
+.connected-layer small { color: #b9cfe8; }
+.layer-signal { background: var(--brand-blue-bright); box-shadow: 0 0 12px rgba(88, 201, 255, .8); }
+
+/* MEASURED: re-enabling the two sparks' drift cost 16.7ms -> 33.3ms (60fps ->
+   30fps). They look trivial, but they live inside .site-glow-horizon, a fixed
+   full-viewport layer with `isolation: isolate` — animating any child forces
+   the whole layer to re-composite every frame. They stay visible but static;
+   the ambient colour field carries the life instead. Do not re-enable without
+   re-measuring. */
