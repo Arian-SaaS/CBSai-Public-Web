@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630" role="img" aria-labelledby="title desc">
+  <title id="title">CBSai — Connected operations. Explainable intelligence.</title>
+  <desc id="desc">CBSai connects the context behind finance, customers, people, vendors, inventory, and delivery.</desc>
+  <defs>
+    <radialGradient id="glow" cx="50%" cy="8%" r="75%"><stop offset="0" stop-color="#4922e5" stop-opacity=".9"/><stop offset=".38" stop-color="#2c9ff0" stop-opacity=".22"/><stop offset="1" stop-color="#05070d" stop-opacity="0"/></radialGradient>
+    <linearGradient id="arc" x1="0" x2="1"><stop offset="0" stop-color="#2c9ff0" stop-opacity="0"/><stop offset=".5" stop-color="#58c9ff"/><stop offset="1" stop-color="#a558fb" stop-opacity="0"/></linearGradient>
+  </defs>
+  <rect width="1200" height="630" fill="#05070d"/>
+  <rect width="1200" height="500" fill="url(#glow)"/>
+  <ellipse cx="600" cy="-20" rx="520" ry="245" fill="none" stroke="url(#arc)" stroke-width="2" opacity=".9"/>
+  <g transform="translate(86 110) skewY(-18)"><rect width="12" height="84" rx="6" fill="#2c9ff0"/><rect x="24" width="12" height="110" rx="6" fill="#2c9ff0"/><rect x="48" width="12" height="132" rx="6" fill="#58c9ff"/></g>
+  <text x="86" y="350" fill="#eff6ff" font-family="Inter,Arial,sans-serif" font-size="96" font-weight="700" letter-spacing="-5">CBS<tspan fill="#58c9ff">ai</tspan></text>
+  <text x="92" y="414" fill="#9caec7" font-family="Inter,Arial,sans-serif" font-size="28">Connected operations. Explainable intelligence.</text>
+  <text x="92" y="530" fill="#58c9ff" font-family="monospace" font-size="18" letter-spacing="4">CBSai.INFO</text>
+</svg>
