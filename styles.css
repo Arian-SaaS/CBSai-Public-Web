@@ -2321,3 +2321,55 @@ body { background: var(--brand-void) !important; }
   .shot-frame { padding: 6px; border-radius: 11px; }
 }
 .subproc-h { color: var(--brand-text); font-family: Calistoga, Georgia, serif; font-size: clamp(26px, 2.6vw, 34px); font-weight: 400; letter-spacing: -.04em; line-height: 1.15; }
+
+/* ── Founder section, expanded (Claude, 2026-08-22) ─────────────────────── */
+.section-founder .founder-layout { grid-template-columns: minmax(0, 1.35fr) minmax(0, .85fr); align-items: stretch; gap: 15px; margin-top: 42px; }
+.section-founder .founder-card { padding: 30px; }
+.founder-lede { margin: 20px 0 14px; color: #eaf3ff; font-size: 16.5px; line-height: 1.6; }
+.founder-card > p { margin: 0 0 14px; color: #a9bad2; font-size: 14.5px; line-height: 1.68; }
+.founder-card > p b { color: #dfeaf8; }
+
+.founder-stack { margin-top: 20px; padding-top: 18px; border-top: 1px solid var(--brand-line); }
+.founder-chips { display: flex; flex-wrap: wrap; gap: 7px; margin-top: 12px; }
+.founder-chips span {
+  padding: 6px 11px;
+  border: 1px solid rgba(137, 188, 239, .22);
+  border-radius: 7px;
+  background: rgba(9, 21, 44, .6);
+  color: #9fbbd6;
+  font-family: "JetBrains Mono", monospace;
+  font-size: 10.5px;
+  letter-spacing: .04em;
+}
+.founder-contact { display: flex; flex-wrap: wrap; gap: 18px; margin-top: 20px; padding-top: 18px; border-top: 1px solid var(--brand-line); }
+.founder-contact a {
+  display: inline-flex; align-items: center; gap: 6px;
+  color: var(--brand-blue-bright); font-size: 13.5px; font-weight: 600;
+  border-bottom: 1px solid rgba(88, 201, 255, .3);
+  transition: border-color .2s var(--ease);
+}
+.founder-contact a:hover { border-bottom-color: var(--brand-blue-bright); }
+
+.founder-aside {
+  display: flex; flex-direction: column;
+  padding: 30px;
+  border: 1px solid rgba(88, 201, 255, .34);
+  border-radius: var(--radius-md);
+  background: linear-gradient(140deg, rgba(16, 40, 78, .94), rgba(28, 20, 62, .94));
+}
+.founder-aside > p { margin: 14px 0 0; color: #c3d6ec; font-size: 15px; line-height: 1.65; }
+.founder-aside .button { margin-top: 22px; align-self: flex-start; }
+.founder-formation-note { margin-top: auto !important; padding-top: 22px; color: #93a9c8 !important; font-size: 12.5px !important; line-height: 1.6 !important; }
+
+@media (max-width: 900px) {
+  .section-founder .founder-layout { grid-template-columns: 1fr; }
+  .section-founder .founder-card, .founder-aside { padding: 22px; }
+  .founder-contact { gap: 12px; }
+  .founder-contact a { min-height: 44px; }
+}
+.footer-contact { display: block; color: #8397b2; font-size: 12px; }
+.footer-contact a { color: #9fbbd6; }
+.footer-contact a:hover, .footer-formation a:hover { color: var(--brand-blue-bright); }
+@media (max-width: 900px) {
+  .footer-contact a, .footer-formation a { display: inline-flex; align-items: center; min-height: 44px; }
+}
