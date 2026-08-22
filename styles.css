@@ -2373,3 +2373,15 @@ body { background: var(--brand-void) !important; }
 @media (max-width: 900px) {
   .footer-contact a, .footer-formation a { display: inline-flex; align-items: center; min-height: 44px; }
 }
+
+/* ── Screenshot legibility (Claude, 2026-08-22) ──────────────────────────────
+   Finance and CRM were in a two-up grid: a ~1900px dashboard rendered into a
+   563px slot, i.e. the UI drawn at 30% of native size. Measured, that — not
+   the file compression — was why tabs and figures were unreadable. All three
+   are now full-width (1160px slot, ~61% of native) and served as native-
+   resolution WebP, which is both sharper on thin UI text and smaller than the
+   downscaled JPEGs it replaces. JPEG stays as a <picture> fallback.          */
+.shot-pair { display: block; }
+.shot + .shot { margin-top: 34px; }
+.shot picture { display: block; }
+.shot picture img { display: block; width: 100%; height: auto; border-radius: 8px; }

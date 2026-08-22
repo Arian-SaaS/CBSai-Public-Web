@@ -24,6 +24,7 @@
     "@types/react": "latest",
     "@types/react-dom": "latest",
     "@vitejs/plugin-react": "latest",
+    "sharp": "^0.35.3",
     "tailwindcss": "latest",
     "typescript": "latest",
     "vite": "latest"
