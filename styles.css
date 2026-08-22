@@ -2295,3 +2295,29 @@ body { background: var(--brand-void) !important; }
   .founder-layout { grid-template-columns: 1fr; gap: 32px; }
   .founder-card { padding: 22px; }
 }
+
+/* ── Product screenshots (Claude, 2026-08-21) ────────────────────────────────
+   Real captures from the staging workspace. The product UI is light and the
+   site is dark, so each sits in a framed "window" that makes the contrast read
+   as deliberate rather than accidental.                                      */
+.shot { margin: 0 0 15px; }
+.shot-frame {
+  position: relative;
+  border: 1px solid rgba(120, 178, 236, .28);
+  border-radius: 14px;
+  background: #0a1831;
+  padding: 9px;
+  box-shadow: 0 30px 70px rgba(0, 0, 0, .5);
+  overflow: hidden;
+}
+.shot-frame img { display: block; width: 100%; height: auto; border-radius: 8px; }
+.shot figcaption { margin-top: 13px; color: #a9bad2; font-size: 13.5px; line-height: 1.65; }
+.shot figcaption b { color: #eaf3ff; }
+.shot-lead { margin-top: 42px; }
+.shot-pair { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 15px; }
+
+@media (max-width: 900px) {
+  .shot-pair { grid-template-columns: 1fr; }
+  .shot-frame { padding: 6px; border-radius: 11px; }
+}
+.subproc-h { color: var(--brand-text); font-family: Calistoga, Georgia, serif; font-size: clamp(26px, 2.6vw, 34px); font-weight: 400; letter-spacing: -.04em; line-height: 1.15; }
