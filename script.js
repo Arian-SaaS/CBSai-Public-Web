@@ -36,6 +36,18 @@ function alignHashTarget() {
 }
 
 window.addEventListener('hashchange', () => window.setTimeout(alignHashTarget, 0));
+/* Detail pages have no modal of their own, so their CTAs point at /#demo.
+   Opening it here means a visitor who lands on /security.html from search can
+   reach the demo form in one click instead of bouncing via the homepage. */
+function openDemoFromHash() {
+  if (window.location.hash !== '#demo') return;
+  const trigger = document.querySelector('[data-open-demo]');
+  if (!trigger) return;
+  window.setTimeout(() => setModal(true), 60);
+}
+window.addEventListener('hashchange', openDemoFromHash);
+window.addEventListener('load', openDemoFromHash);
+
 window.setTimeout(alignHashTarget, 0);
 window.addEventListener('load', () => window.setTimeout(alignHashTarget, 0));
 document.fonts?.ready.then(() => window.setTimeout(alignHashTarget, 0));

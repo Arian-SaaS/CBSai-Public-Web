@@ -22,6 +22,7 @@ export default defineConfig({
         privacy: path.resolve(rootDir, "privacy.html"),
         terms: path.resolve(rootDir, "terms.html"),
         applicantPrivacy: path.resolve(rootDir, "applicant-privacy.html"),
+        careers: path.resolve(rootDir, "careers.html"),
       },
     },
   },

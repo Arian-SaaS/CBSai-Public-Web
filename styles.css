@@ -2094,3 +2094,177 @@ body { background: var(--brand-void) !important; }
 @media (max-width: 900px) {
   .detail-proof-grid span { font-size: 10.5px; letter-spacing: .06em; }
 }
+
+/* Demo form additions */
+.label-optional { color: #7f97b6; font-size: 10.5px; font-weight: 500; letter-spacing: .06em; text-transform: uppercase; }
+.form-promise {
+  display: flex;
+  align-items: flex-start;
+  gap: 9px;
+  margin: 14px 0 0;
+  padding-top: 13px;
+  border-top: 1px solid var(--brand-line);
+  color: #9caec7;
+  font-size: 12.5px;
+  line-height: 1.55;
+}
+.form-promise b { color: #dfeaf8; }
+.form-promise-dot { width: 6px; height: 6px; margin-top: 6px; flex: none; border-radius: 50%; background: #8de1c5; box-shadow: 0 0 0 3px rgba(141,225,197,.16); }
+
+/* ── Product preview screens (Claude, 2026-08-21) ────────────────────────────
+   Design previews of the product experience, labelled as such in the copy.
+   Built as real markup rather than images so they stay crisp, are readable by
+   assistive tech, and cost nothing extra to load.                            */
+
+.preview-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 15px; }
+.preview-card {
+  display: flex;
+  flex-direction: column;
+  margin: 0;
+  border: 1px solid rgba(120, 178, 236, .24);
+  border-radius: 15px;
+  background: linear-gradient(168deg, rgba(12, 30, 58, .95), rgba(6, 15, 33, .97));
+  box-shadow: 0 26px 60px rgba(0, 0, 0, .45);
+  overflow: hidden;
+}
+.preview-card-wide { grid-column: span 2; }
+
+.preview-chrome {
+  display: flex; align-items: center; gap: 9px;
+  padding: 12px 15px;
+  border-bottom: 1px solid rgba(120, 178, 236, .16);
+  background: rgba(6, 15, 32, .72);
+}
+.preview-chrome b { color: #eaf3ff; font-size: 12.5px; font-weight: 650; }
+.preview-tag {
+  margin-left: auto; color: #8ea6c4;
+  font-family: "JetBrains Mono", monospace; font-size: 10px;
+  letter-spacing: .1em; text-transform: uppercase;
+}
+.preview-dot { width: 7px; height: 7px; border-radius: 50%; background: var(--brand-blue-bright); box-shadow: 0 0 0 3px rgba(88,201,255,.16); }
+.preview-dot.is-violet { background: var(--brand-violet); box-shadow: 0 0 0 3px rgba(165,88,251,.18); }
+
+.preview-body { display: flex; flex-direction: column; gap: 12px; padding: 15px; flex: 1; }
+.preview-row { display: flex; justify-content: space-between; gap: 12px; font-size: 12px; }
+.preview-k { color: #8ea6c4; font-family: "JetBrains Mono", monospace; font-size: 10px; letter-spacing: .1em; text-transform: uppercase; }
+.preview-v { color: #eaf3ff; font-weight: 600; }
+
+.preview-metric { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+.preview-metric > div { display: flex; flex-direction: column; gap: 3px; }
+.preview-metric span { color: #8ea6c4; font-size: 11px; }
+.preview-metric b { color: #fff; font-family: "JetBrains Mono", monospace; font-size: 24px; font-weight: 500; letter-spacing: -.035em; }
+.preview-metric b i { font-style: normal; font-size: 14px; opacity: .55; }
+.preview-metric em { font-family: "JetBrains Mono", monospace; font-size: 10px; font-style: normal; }
+.preview-metric em.is-down { color: #e8927f; }
+.preview-metric em.is-up { color: #efb668; }
+
+.preview-quote {
+  padding: 12px 13px;
+  border: 1px solid rgba(88, 201, 255, .24);
+  border-radius: 11px;
+  background: linear-gradient(135deg, rgba(16, 42, 78, .8), rgba(9, 22, 45, .8));
+  color: #dfeaf8; font-size: 12.5px; line-height: 1.55;
+}
+.preview-trace { display: flex; align-items: center; gap: 7px; color: #8ea6c4; font-family: "JetBrains Mono", monospace; font-size: 10px; letter-spacing: .04em; }
+.preview-trace-dot { width: 4px; height: 4px; flex: none; border-radius: 50%; background: #8de1c5; }
+
+.preview-actions { display: flex; gap: 8px; margin-top: auto; }
+.preview-btn { padding: 8px 13px; border: 1px solid rgba(137,188,239,.26); border-radius: 8px; color: #cfe0f4; font-size: 11.5px; font-weight: 600; }
+.preview-btn.is-primary { border-color: transparent; background: var(--brand-blue); color: #05070d; }
+
+.preview-list { display: flex; flex-direction: column; gap: 9px; margin: 0; padding: 0; list-style: none; }
+.preview-list li { display: grid; grid-template-columns: 58px 1fr; gap: 11px; align-items: start; padding: 10px 11px; border: 1px solid rgba(120,178,236,.16); border-radius: 10px; background: rgba(9,21,44,.66); }
+.preview-list b { display: block; color: #eaf3ff; font-size: 12.5px; }
+.preview-list small { color: #9bb2cd; font-size: 11px; line-height: 1.45; }
+.preview-sev { padding: 3px 7px; border-radius: 20px; text-align: center; font-family: "JetBrains Mono", monospace; font-size: 9px; letter-spacing: .07em; text-transform: uppercase; }
+.preview-sev.is-high { background: rgba(232,146,127,.16); color: #f0a08d; }
+.preview-sev.is-med { background: rgba(223,156,64,.16); color: #efb668; }
+.preview-sev.is-low { background: rgba(141,225,197,.14); color: #8de1c5; }
+
+.preview-table { width: 100%; border-collapse: collapse; font-size: 12px; }
+.preview-table th { padding: 8px 10px; border-bottom: 1px solid rgba(120,178,236,.2); color: #8ea6c4; font-family: "JetBrains Mono", monospace; font-size: 9.5px; font-weight: 500; letter-spacing: .1em; text-align: left; text-transform: uppercase; }
+.preview-table th:not(:first-child), .preview-table td:not(:first-child) { text-align: right; }
+.preview-table td { padding: 9px 10px; border-bottom: 1px solid rgba(120,178,236,.1); color: #cfe0f4; font-family: "JetBrains Mono", monospace; }
+.preview-table tr:last-child td { border-bottom: 0; }
+.preview-table td.is-bad { color: #f0a08d; }
+.preview-table td.is-good { color: #8de1c5; }
+
+.preview-card figcaption { padding: 13px 15px; border-top: 1px solid rgba(120,178,236,.14); background: rgba(5,12,26,.5); color: #9caec7; font-size: 12.5px; line-height: 1.55; }
+.preview-card figcaption b { color: #dfeaf8; }
+
+@media (max-width: 900px) {
+  .preview-grid { grid-template-columns: 1fr; }
+  .preview-card-wide { grid-column: auto; }
+  .preview-table { font-size: 11px; }
+  .preview-table th, .preview-table td { padding: 7px 6px; }
+}
+
+/* ── Fit, pricing signal and design-partner offer (Claude, 2026-08-21) ────── */
+.fit-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 15px; margin-top: 42px; }
+.fit-card { position: relative; padding: 26px; border: 1px solid var(--brand-line); border-radius: var(--radius-md); background: rgba(13, 31, 61, .8); }
+.fit-card ul { margin: 16px 0 0; padding: 0; list-style: none; display: flex; flex-direction: column; gap: 12px; }
+.fit-card li { position: relative; padding-left: 24px; color: #b9cbe2; font-size: 14.5px; line-height: 1.6; }
+.fit-card li b { color: #eaf3ff; }
+.fit-card li::before { position: absolute; left: 0; top: 1px; font-family: "JetBrains Mono", monospace; font-size: 13px; }
+.fit-card-yes li::before { content: "+"; color: #8de1c5; }
+.fit-card-no li::before { content: "\2212"; color: #e8927f; }
+.fit-tag { display: inline-flex; padding: 6px 12px; border-radius: 20px; font-family: "JetBrains Mono", monospace; font-size: 10px; letter-spacing: .1em; text-transform: uppercase; }
+.fit-card-yes .fit-tag { background: rgba(141,225,197,.14); color: #8de1c5; }
+.fit-card-no .fit-tag { background: rgba(232,117,101,.14); color: #f0a08d; }
+
+.fit-commercial { display: grid; grid-template-columns: minmax(0, 1.05fr) minmax(0, .95fr); gap: 15px; margin-top: 15px; }
+.fit-commercial > div { padding: 26px; border: 1px solid var(--brand-line); border-radius: var(--radius-md); }
+.fit-commercial p { margin: 12px 0 0; color: #b9cbe2; font-size: 14.5px; line-height: 1.65; }
+.fit-partner { background: linear-gradient(130deg, rgba(16,40,78,.92), rgba(28,20,62,.92)); border-color: rgba(88,201,255,.36) !important; }
+.fit-partner b { display: block; margin-top: 12px; color: #fff; font-family: Calistoga, Georgia, serif; font-size: 22px; font-weight: 400; letter-spacing: -.03em; }
+.fit-partner .button { margin-top: 18px; }
+
+@media (max-width: 900px) {
+  .fit-grid, .fit-commercial { grid-template-columns: 1fr; }
+  .fit-card, .fit-commercial > div { padding: 20px; }
+}
+
+/* careers.html renders the careers heading as the page h1 */
+.detail-section .section-heading h1 {
+  margin: 20px 0 22px;
+  color: var(--brand-text);
+  font-family: Calistoga, Georgia, serif;
+  font-size: clamp(42px, 4.8vw, 66px);
+  font-weight: 400;
+  letter-spacing: -.055em;
+  line-height: 1.07;
+}
+.detail-section .section-heading h1 em { color: var(--brand-blue-bright); font-style: normal; }
+
+@media (max-width: 900px) { .career-tag { font-size: 10.5px; } }
+
+/* ── Micro-label legibility floor on phones (Claude, 2026-08-21) ─────────────
+   A sweep at 375px found homepage labels rendering at 7-9px: the hero meta
+   strip, the fragmentation map labels, workflow captions and several component
+   kickers. Uppercase monospace reads smaller than its nominal size, so these
+   were effectively decorative. Floored at 10.5px on touch widths only.       */
+@media (max-width: 900px) {
+  .animate-hero-meta span,
+  .map-label, .map-label span,
+  .connected-layer small,
+  .workflow-steps li small, .workflow-steps li span,
+  .workflow-caption span,
+  .assistant-foot, .assistant-foot span,
+  .panel-kicker,
+  .message-label,
+  .action-button,
+  .artemis-core small,
+  .hero-console-metrics em,
+  .source-icon { font-size: 10.5px; }
+}
+
+/* Remaining sub-10px labels found in the same 375px sweep. */
+@media (max-width: 900px) {
+  .artemis-node-label small,
+  .assistant-tab span, .assistant-tab small,
+  .loop-step span, .loop-step small,
+  .outcome-index,
+  .evidence-index-card span, .evidence-index-card small,
+  .detail-proof-grid span,
+  .stage-console-label { font-size: 10.5px; }
+}
