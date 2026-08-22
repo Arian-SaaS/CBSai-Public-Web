@@ -2268,3 +2268,30 @@ body { background: var(--brand-void) !important; }
   .detail-proof-grid span,
   .stage-console-label { font-size: 10.5px; }
 }
+
+/* ── Founder + formation notice (Claude, 2026-08-21) ─────────────────────── */
+.footer-formation { display: block; max-width: 640px; color: #8397b2; font-size: 11.5px; line-height: 1.6; }
+.footer-formation a { color: #9fbbd6; }
+.legal-footer .footer-formation { margin-top: 8px; }
+
+.founder-layout { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, .92fr); gap: 60px; align-items: center; }
+.founder-card { padding: 28px; border: 1px solid var(--brand-line); border-radius: var(--radius-md); background: rgba(13, 31, 61, .82); }
+.founder-id { display: flex; align-items: center; gap: 14px; }
+.founder-initials {
+  display: grid; place-items: center;
+  width: 54px; height: 54px; flex: none;
+  border: 1px solid rgba(88, 201, 255, .34);
+  border-radius: 14px;
+  background: linear-gradient(140deg, rgba(16,40,78,.95), rgba(28,20,62,.95));
+  color: var(--brand-blue-bright);
+  font-family: "JetBrains Mono", monospace; font-size: 16px; font-weight: 600; letter-spacing: .04em;
+}
+.founder-id b { display: block; color: #fff; font-size: 18px; font-weight: 650; letter-spacing: -.01em; }
+.founder-id span { color: #9caec7; font-size: 13px; }
+.founder-note { margin: 18px 0 0; padding-top: 16px; border-top: 1px solid var(--brand-line); color: #a9bad2; font-size: 13.5px; line-height: 1.65; }
+.founder-card .text-link { display: inline-flex; align-items: center; gap: 6px; margin-top: 16px; }
+
+@media (max-width: 900px) {
+  .founder-layout { grid-template-columns: 1fr; gap: 32px; }
+  .founder-card { padding: 22px; }
+}
