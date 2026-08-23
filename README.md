@@ -1,6 +1,6 @@
 # CBSai Public Website
 
-The public marketing site for CBSai, deployed at `www.cbsai.info`. The product application intentionally remains on the separate `cbsai.co` domain.
+The public marketing site for CBSai, deployed at `www.cbsai.co`. The product application intentionally remains on the separate `cbsai.co` domain.
 
 ## Local development
 
