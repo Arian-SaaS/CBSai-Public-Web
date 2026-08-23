@@ -2423,9 +2423,20 @@ body { background: var(--brand-void) !important; }
    equal cards on the first row and the aside spanning beneath, so neither
    person is visually subordinate to the other.                               */
 @media (min-width: 981px) {
-  .founder-layout { grid-template-columns: repeat(2, minmax(0, 1fr)); align-items: stretch; }
-  .founder-layout > .founder-aside { grid-column: 1 / -1; }
+  /* Must match the specificity of `.section-founder .founder-layout` at line
+     ~2326 (0,2,0) - a bare `.founder-layout` (0,1,0) loses to it no matter how
+     late it appears. That rule's 1.35fr/.85fr split dates from when this row
+     was one card plus an aside; with two founders it made Reza's card 712px
+     against Matthew's 448px. */
+  .section-founder .founder-layout { grid-template-columns: repeat(2, minmax(0, 1fr)); align-items: stretch; }
+  .section-founder .founder-layout > .founder-aside { grid-column: 1 / -1; }
 }
+
+/* Cards stretch to equal height, so the shorter bio left a large void beneath
+   it. Making the card a flex column and pushing the contact row down with
+   margin-top:auto anchors both contact rows to the same baseline. */
+.founder-card { display: flex; flex-direction: column; }
+.founder-card .founder-contact { margin-top: auto; padding-top: 20px; }
 .founder-aside { display: flex; flex-direction: column; justify-content: center; }
 
 /* ── Word spacing on display headings (Claude, 2026-08-23) ───────────────────
