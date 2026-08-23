@@ -1,3 +1,11 @@
 node_modules/
 dist/
 .qa/
+
+# Agent working docs - kept local, not published.
+# The repo is public, so internal handoff notes, known-issue lists and
+# working guidance stay out of it. Every agent still reads these from the
+# local checkout; they are simply not tracked.
+AGENTS.md
+CLAUDE.md
+HANDOFF-CODEX.md
