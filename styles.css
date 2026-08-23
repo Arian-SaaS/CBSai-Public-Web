@@ -2403,3 +2403,17 @@ body { background: var(--brand-void) !important; }
 @media (max-width: 560px) {
   .founder-photo img { width: 60px; height: 60px; border-radius: 14px; }
 }
+
+/* ── Mission & Vision (Claude, 2026-08-22) ───────────────────────────────────
+   Full statements live in the About section; the short pair is used elsewhere.
+   Left rule rather than a card, so they read as a statement of intent rather
+   than another feature box.                                                  */
+.mv-block { display: grid; gap: 22px; margin-top: 28px; padding-top: 26px; border-top: 1px solid var(--brand-line); }
+.mv-item .eyebrow { margin-bottom: 9px; }
+.mv-item p { margin: 0; padding-left: 15px; border-left: 2px solid rgba(88, 201, 255, .38); color: #c2d3e8; font-size: 15.5px; line-height: 1.72; }
+
+.mv-short { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 15px; margin-top: 34px; }
+.mv-short > div { padding: 20px 22px; border: 1px solid var(--brand-line); border-radius: 14px; background: rgba(13, 31, 61, .55); }
+.mv-short .eyebrow { margin-bottom: 10px; }
+.mv-short b { display: block; color: #eaf3ff; font-family: Calistoga, Georgia, serif; font-size: clamp(19px, 1.7vw, 23px); font-weight: 400; letter-spacing: -.02em; line-height: 1.38; }
+@media (max-width: 760px) { .mv-short { grid-template-columns: 1fr; } }
