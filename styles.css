@@ -2385,3 +2385,21 @@ body { background: var(--brand-void) !important; }
 .shot + .shot { margin-top: 34px; }
 .shot picture { display: block; }
 .shot picture img { display: block; width: 100%; height: auto; border-radius: 8px; }
+
+/* ── Founder portrait (Claude, 2026-08-22) ───────────────────────────────────
+   Replaces the "RS" initials placeholder. Sits in the same flex slot, sized up
+   from 54px to 72px so it reads as a portrait rather than an avatar chip, and
+   served at 240px (3x) so it stays sharp on high-DPI screens.                */
+.founder-photo { display: block; flex: none; }
+.founder-photo img {
+  display: block;
+  width: 72px; height: 72px;
+  border: 1px solid rgba(88, 201, 255, .34);
+  border-radius: 16px;
+  object-fit: cover;
+  object-position: 50% 18%;
+  background: linear-gradient(140deg, rgba(16,40,78,.95), rgba(28,20,62,.95));
+}
+@media (max-width: 560px) {
+  .founder-photo img { width: 60px; height: 60px; border-radius: 14px; }
+}
