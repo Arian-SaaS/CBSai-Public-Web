@@ -2427,3 +2427,17 @@ body { background: var(--brand-void) !important; }
   .founder-layout > .founder-aside { grid-column: 1 / -1; }
 }
 .founder-aside { display: flex; flex-direction: column; justify-content: center; }
+
+/* ── Word spacing on display headings (Claude, 2026-08-23) ───────────────────
+   The display headings run heavy negative tracking (-.055em globally, -.075em
+   on detail heroes) to tighten Calistoga. Negative letter-spacing also shrinks
+   the SPACE glyph, so measured word gaps were 0.117em against a 0.20-0.26em
+   norm for a display serif - words visibly ran together.
+
+   Font-size cannot fix this: letter-spacing is em-based, so the ratio is
+   identical at every size. word-spacing adds the gap back without loosening
+   the letterforms, which is the look the tight tracking is there for.       */
+
+h1, h2 { word-spacing: .085em; }
+.detail-hero h1, .legal-article h1 { word-spacing: .105em; }
+.animate-hero-title { word-spacing: .09em; }
